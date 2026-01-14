@@ -1,11 +1,11 @@
+import productsData from "../data/products.json";
+
 export interface Product {
   code: string;
   name: string;
+  description: string;
   priceCents: number;
+  color: string;
 }
 
-export const defaultCatalog: Product[] = [
-  { code: "R01", name: "Red Widget", priceCents: 3295 },
-  { code: "G01", name: "Green Widget", priceCents: 2495 },
-  { code: "B01", name: "Blue Widget", priceCents: 795 },
-];
+export const defaultCatalog: Product[] = productsData.products;

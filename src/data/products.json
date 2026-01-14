@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "code": "R01",
+      "name": "Red Widget",
+      "description": "Premium quality red widget",
+      "priceCents": 3295,
+      "color": "#ef4444"
+    },
+    {
+      "code": "G01",
+      "name": "Green Widget",
+      "description": "Eco-friendly green widget",
+      "priceCents": 2495,
+      "color": "#22c55e"
+    },
+    {
+      "code": "B01",
+      "name": "Blue Widget",
+      "description": "Classic blue widget",
+      "priceCents": 795,
+      "color": "#3b82f6"
+    }
+  ],
+  "offers": [
+    {
+      "code": "R01_HALF",
+      "title": "Red Widget Deal",
+      "description": "Buy one red widget, get the second half price!"
+    }
+  ],
+  "delivery": {
+    "tiers": [
+      { "upTo": 50, "cost": 4.95, "label": "Standard" },
+      { "upTo": 90, "cost": 2.95, "label": "Reduced" },
+      { "upTo": null, "cost": 0, "label": "Free" }
+    ]
+  }
+}

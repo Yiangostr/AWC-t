@@ -7,6 +7,7 @@ import { initTheme, type Theme } from "./ui/theme";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { ProductGrid } from "./components/ProductGrid";
 import { BasketPanel } from "./components/BasketPanel";
+import productsData from "./data/products.json";
 
 type Action =
   | { type: "ADD"; code: string }
@@ -72,31 +73,69 @@ function App() {
     []
   );
 
+  const offer = productsData.offers[0];
+
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8">
-      <header className="max-w-5xl mx-auto flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold tracking-tight">Acme Widget Co</h1>
-        <ThemeToggle theme={state.theme} onToggle={handleThemeToggle} />
+    <div className="min-h-screen flex flex-col">
+      <header className="shrink-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm dark:shadow-none">
+        <div className="px-4 py-2.5 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-md bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white font-bold text-xs shadow-sm">
+              A
+            </div>
+            <span className="font-semibold text-sm text-slate-900 dark:text-white">
+              Acme Widgets
+            </span>
+          </div>
+          <ThemeToggle theme={state.theme} onToggle={handleThemeToggle} />
+        </div>
       </header>
 
-      <main className="max-w-5xl mx-auto grid lg:grid-cols-3 gap-6">
-        <section className="lg:col-span-2">
-          <h2 className="text-lg font-semibold mb-4">Products</h2>
-          <ProductGrid products={defaultCatalog} onAdd={handleAdd} />
-        </section>
+      {offer && (
+        <div className="max-w-3xl mx-auto w-full px-3 mt-4">
+          <div className="bg-green-600 text-white py-2 px-3 text-center text-xs font-medium rounded-lg shadow-sm">
+            {offer.description}
+          </div>
+        </div>
+      )}
 
-        <aside>
-          <BasketPanel
-            items={state.items}
-            catalog={defaultCatalog}
-            subtotalCents={subtotalCents}
-            discountCents={discountCents}
-            deliveryCents={deliveryCents}
-            total={total}
-            onRemove={handleRemove}
-            onClear={handleClear}
-          />
-        </aside>
+      <main className="flex-1 max-w-3xl mx-auto w-full px-3 py-4">
+        <div className="grid md:grid-cols-2 gap-4 h-full">
+          <section>
+            <h2 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">
+              Products
+            </h2>
+            <ProductGrid products={defaultCatalog} onAdd={handleAdd} />
+
+            <div className="mt-4 p-3 rounded-xl bg-white dark:bg-slate-800 shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-700 text-xs">
+              <p className="font-semibold text-slate-900 dark:text-white mb-1">
+                Delivery rates
+              </p>
+              <ul className="space-y-0.5 text-slate-600 dark:text-slate-400">
+                <li>Under $50: $4.95</li>
+                <li>Under $90: $2.95</li>
+                <li>$90+: Free</li>
+              </ul>
+            </div>
+          </section>
+
+          <aside className="md:sticky md:top-4 md:self-start">
+            <h2 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">
+              Basket
+            </h2>
+            <BasketPanel
+              items={state.items}
+              catalog={defaultCatalog}
+              subtotalCents={subtotalCents}
+              discountCents={discountCents}
+              deliveryCents={deliveryCents}
+              total={total}
+              onAdd={handleAdd}
+              onRemove={handleRemove}
+              onClear={handleClear}
+            />
+          </aside>
+        </div>
       </main>
     </div>
   );
